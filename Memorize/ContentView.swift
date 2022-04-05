@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    var emojis = ["✈️", "🚊", "⛴", "🚗", "🚌", "🏎", "🚀", "🚖", "🚙", "🚅"]
+    var emojis = ["✈️", "🚊", "⛴", "🚗", "🚌", "🏎", "🚀", "🚖", "🚙", "🚅", "🛵", "🛰", "🚡"]
         
     //Emoji variable that controls how many emojis or CardViews will be displayed at once.
     @State var emojiCount = 4
@@ -18,10 +18,12 @@ struct ContentView: View {
         //Create a grid for the CardView using a LazyVStack and LazyVGrid
         
         VStack {
-            HStack {
-                //ForEach emoji, create a CardView
-                ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
-                   CardView(content: emoji)
+            ScrollView {
+                LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
+                    //ForEach emoji, create a CardView
+                    ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
+                        CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
+                    }
                 }
             }
             .foregroundColor(.red)
